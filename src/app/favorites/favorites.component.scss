@@ -1,0 +1,28 @@
+/* src/app/favorites/favorites.component.scss */
+.favorites-container {
+    text-align: center;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 8px;
+    background-color: #f0f0f0;
+    margin-bottom: 5px;
+  }
+  
+  button {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  button:hover {
+    background-color: #cc0000;
+  }
+  

@@ -1,0 +1,24 @@
+<!-- src/app/weather/weather.component.html -->
+<div class="weather-container">
+  <input type="text" [(ngModel)]="city" placeholder="Enter city name" class="input" />
+  <button (click)="getWeather()" class="button">Get Weather</button>
+
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+  <div *ngIf="weatherData">
+    <h3>{{ weatherData.location.name }} Weather</h3>
+    <p>Temperature: {{ weatherData.current.temp_c }}°C / {{ weatherData.current.temp_f }}°F</p>
+    <p>Condition: {{ weatherData.current.condition.text }}</p> <img src="{{ weatherData.current.condition.icon}}" alt="" class="">
+    <p>Wind Speed: {{ weatherData.current.wind_kph }} km/h</p>
+    <p>Humidity: {{ weatherData.current.humidity }}%</p>
+    <p>Local Time: {{ weatherData.location.localtime }}</p>
+
+    <button (click)="addFavorite()">Add to favorite</button>
+  </div>
+
+  <!-- Navigation links -->
+  <div>
+    <a routerLink="/history">Go to History</a>
+    <a routerLink="/favorites">Go to Favorites</a>
+  </div>
+</div>

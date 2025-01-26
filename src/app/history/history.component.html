@@ -1,0 +1,10 @@
+<!-- src/app/history/history.component.html -->
+<div class="history-container">
+    <h3>Search History</h3>
+    <ul>
+      <li *ngFor="let city of history" (click)="selectCity(city)">
+        {{ city }}
+      </li>
+    </ul>
+  </div>
+  

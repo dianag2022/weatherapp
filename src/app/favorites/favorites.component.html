@@ -1,0 +1,11 @@
+<!-- src/app/favorites/favorites.component.html -->
+<div class="favorites-container">
+    <h3>Favorites</h3>
+    <ul>
+      <li *ngFor="let city of favorites">
+        {{ city }}
+        <button (click)="removeFavorite(city)">Remove</button>
+      </li>
+    </ul>
+  </div>
+  
