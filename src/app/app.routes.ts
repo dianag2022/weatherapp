@@ -8,5 +8,6 @@ export const routes: Routes = [
   { path: '', component: WeatherComponent },    // Default route to WeatherComponent
   { path: 'history', component: HistoryComponent },
   { path: 'favorites', component: FavoritesComponent },
+  { path: 'weather/:city', component: WeatherComponent } , // Ruta para ver el clima de una ciudad
   { path: '**', redirectTo: '' }  // Wildcard route for 404
 ];

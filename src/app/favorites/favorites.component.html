@@ -1,11 +1,18 @@
 <!-- src/app/favorites/favorites.component.html -->
-<div class="favorites-container">
-    <h3>Favorites</h3>
-    <ul>
-      <li *ngFor="let city of favorites">
-        {{ city }}
-        <button (click)="removeFavorite(city)">Remove</button>
-      </li>
-    </ul>
-  </div>
-  
+<div class="favorites-container p-6 bg-white rounded-lg shadow-lg max-w-lg mx-auto mt-10">
+  <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Favorites</h3>
+
+  <ul class="space-y-4">
+    <li *ngFor="let city of favorites"
+        class="flex justify-between items-center p-4 bg-gray-50 rounded-lg shadow hover:bg-gray-100 transition duration-300 ease-in-out transform hover:scale-105">
+
+      <span class="text-lg text-gray-700">{{ city }}</span>
+
+      <button
+        (click)="removeFavorite(city)"
+        class="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-red-600 transition duration-200 transform hover:scale-105">
+        Remove
+      </button>
+    </li>
+  </ul>
+</div>

@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HistoryService } from '../history/history.service';
 import { StorageService } from '../services/storage.service';  // Importar el servicio
+import { WeatherData } from '../weather/weather.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-history',
@@ -12,9 +14,13 @@ import { StorageService } from '../services/storage.service';  // Importar el se
   styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent {
-  history: string[] = [];
+  history: WeatherData[] = [];
+  isTableView: boolean = true; // Modo inicial: Vista de tabla
 
-  constructor(private historyService: HistoryService, private storageService: StorageService) {
+  constructor(
+    private historyService: HistoryService,
+    private storageService: StorageService,
+    private router: Router) {
     this.loadHistory();
   }
 
@@ -22,7 +28,15 @@ export class HistoryComponent {
     this.history = this.historyService.loadHistory();
   }
 
-  selectCity(city: string) {
+  selectCity(city: WeatherData) {
     // Logic to display selected city's weather
+    console.log(city);
+    this.router.navigate(['/weather', city.location.name]);  // Usamos el nombre de la ciudad como parámetro
+
+
+  }
+
+  toggleViewMode() {
+    this.isTableView = !this.isTableView;
   }
 }

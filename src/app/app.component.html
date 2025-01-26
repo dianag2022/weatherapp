@@ -1,1 +1,28 @@
-<router-outlet />
+<header class="bg-white shadow-md p-4">
+  <div class="navigation-links flex justify-center items-center gap-8">
+    <a
+      routerLink=""
+      routerLinkActive="text-blue-700 font-bold"
+      class="text-blue-500 hover:text-blue-600 font-medium transition-all duration-300 transform hover:scale-105"
+    >
+      Weather
+    </a>
+    <a
+      routerLink="history"
+      routerLinkActive="text-blue-700 font-bold"
+      class="text-blue-500 hover:text-blue-600 font-medium transition-all duration-300 transform hover:scale-105"
+    >
+      History
+    </a>
+    <a
+      routerLink="favorites"
+      routerLinkActive="text-blue-700 font-bold"
+      class="text-blue-500 hover:text-blue-600 font-medium transition-all duration-300 transform hover:scale-105"
+    >
+      Favorites
+    </a>
+  </div>
+</header>
+
+
+<router-outlet></router-outlet>
