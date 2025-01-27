@@ -5,9 +5,15 @@ import { HistoryComponent } from './history/history.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 
 export const routes: Routes = [
-  { path: '', component: WeatherComponent },    // Default route to WeatherComponent
-  { path: 'history', component: HistoryComponent },
-  { path: 'favorites', component: FavoritesComponent },
-  { path: 'weather/:city', component: WeatherComponent } , // Ruta para ver el clima de una ciudad
-  { path: '**', redirectTo: '' }  // Wildcard route for 404
+  {
+    path: '', loadComponent: () =>
+      import('./weather/weather.component').then((m) => m.WeatherComponent)
+  },   
+  { path: 'history', loadComponent: () =>
+    import('./history/history.component').then((m) => m.HistoryComponent) },
+  { path: 'favorites', loadComponent: () =>
+    import('./favorites/favorites.component').then((m) => m.FavoritesComponent) },
+  { path: 'weather/:city', loadComponent: () =>
+    import('./weather/weather.component').then((m) => m.WeatherComponent) }, 
+  { path: '**', redirectTo: '' } 
 ];

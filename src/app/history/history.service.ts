@@ -13,10 +13,4 @@ export class HistoryService {
   loadHistory(): WeatherData[] {
     return this.storageService.getItem<WeatherData[]>('history') || [];
   }
-
-
-
-  addHistory(city: string): void {
-    this.storageService.setItem('history', JSON.stringify(history));
-  }
 }
