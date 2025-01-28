@@ -20,11 +20,7 @@ export class FavoritesService {
 
   removeFavorite(city: string): void {
     let favorites = this.getFavorites();
-    console.log(favorites, 'before');
-    
     favorites = favorites.filter(fav => fav !== city);
-    console.log(favorites, 'after');
-
     this.storageService.setItem('favorites', favorites);
   }
 }

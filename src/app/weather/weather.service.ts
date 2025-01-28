@@ -4,29 +4,57 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StorageService } from '../services/storage.service';
 import { WeatherData } from './weather.interface';
+import { shareReplay } from 'rxjs/operators';
+import { environment } from '../../environments/environment'; // Import environment
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class WeatherService {
-  private apiKey = 'c5c45d24fff0401f916155022252501';
+  private apiKey = environment.apiKey;
   private apiUrl = 'https://api.weatherapi.com/v1/current.json';
-  private apiCitiesUrl = 'https://api.weatherapi.com/v1/current.json';
+  private apiCitiesUrl = 'https://api.weatherapi.com/v1/search.json';
+
+  private weatherCache$: { [city: string]: Observable<any> } = {}; 
+  private suggestionsCache$: { [query: string]: Observable<any> } = {}; 
 
   constructor(private http: HttpClient, private storageService: StorageService) {}
 
   getWeather(city: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}?key=${this.apiKey}&q=${city}`);
+    if (!this.weatherCache$[city]) {
+
+      this.weatherCache$[city] = this.http
+        .get<any>(`${this.apiUrl}?key=${this.apiKey}&q=${city}`)
+        .pipe(
+          shareReplay(1) // Compartir la respuesta y almacenar en caché
+        );
+    } else {
+      console.log('Returning from cache data:', city);
+    }
+
+    return this.weatherCache$[city];
   }
+
   getSuggestedName(city: string): Observable<any> {
-    return this.http.get<any>(`${this.apiCitiesUrl}?key=${this.apiKey}&q=${city}`);
+    if (!this.suggestionsCache$[city]) {
+
+      this.suggestionsCache$[city] = this.http
+        .get<any>(`${this.apiCitiesUrl}?key=${this.apiKey}&q=${city}`)
+        .pipe(
+          shareReplay(1) // Compartir la respuesta y almacenar en caché
+        );
+    } else {
+      console.log('Returning from cache:', city);
+    }
+
+    return this.suggestionsCache$[city];
   }
 
   saveToHistory(weatherData: WeatherData): void {
     let history = this.storageService.getItem<WeatherData[]>('history') || [];
-    console.log('history save', history, weatherData.location.name);
 
-    // Verificar si la ciudad ya está en el historial
+    // Check for same city
     const cityIndex = history.findIndex(item => item.location.name === weatherData.location.name);
 
     if (cityIndex === -1) {

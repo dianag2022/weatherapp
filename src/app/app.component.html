@@ -1,28 +1,44 @@
-<header class="bg-white shadow-md p-4">
+<header class="bg-gradient-to-r from-gray-800 to-gray-600 shadow-md p-4">
   <div class="navigation-links flex justify-center items-center gap-8">
     <a
       routerLink=""
-      routerLinkActive="text-blue-700 font-bold"
-      class="text-blue-500 hover:text-blue-600 font-medium transition-all duration-300 transform hover:scale-105"
+      routerLinkActive="text-white font-bold"
+      class="text-gray-300 hover:text-teal-300 font-medium transition-all duration-300 transform hover:scale-110"
     >
-      Weather
+      {{ 'WEATHER' | translate }}
     </a>
     <a
       routerLink="history"
-      routerLinkActive="text-blue-700 font-bold"
-      class="text-blue-500 hover:text-blue-600 font-medium transition-all duration-300 transform hover:scale-105"
+      routerLinkActive="text-white font-bold"
+      class="text-gray-300 hover:text-teal-300 font-medium transition-all duration-300 transform hover:scale-110"
     >
-      History
+    {{ 'TITLE' | translate }}
     </a>
     <a
       routerLink="favorites"
-      routerLinkActive="text-blue-700 font-bold"
-      class="text-blue-500 hover:text-blue-600 font-medium transition-all duration-300 transform hover:scale-105"
+      routerLinkActive="text-white font-bold"
+      class="text-gray-300 hover:text-teal-300 font-medium transition-all duration-300 transform hover:scale-110"
     >
-      Favorites
+    {{ 'FAVORITES' | translate }}
     </a>
+  </div>
+
+  <div class="flex justify-center mt-4">
+    <button
+      (click)="changeLanguage('en')"
+      class="px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition duration-300 transform hover:scale-110"
+    >
+      English
+    </button>
+    <button
+      (click)="changeLanguage('es')"
+      class="ml-4 px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition duration-300 transform hover:scale-110"
+    >
+      Español
+    </button>
   </div>
 </header>
 
-
-<router-outlet></router-outlet>
+<main class="p-4">
+  <router-outlet></router-outlet>
+</main>

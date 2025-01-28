@@ -7,23 +7,21 @@ export class StorageService {
 
 
 
-  // Guardar un valor en localStorage solo si estamos en el navegador
   setItem(key: string, value: any): void {
       try {
-        const valueToStore = JSON.stringify(value);  // Convertimos el valor a JSON
-        window.localStorage.setItem(key, valueToStore);  // Guardamos en localStorage
+        const valueToStore = JSON.stringify(value);  
+        window.localStorage.setItem(key, valueToStore);  
       } catch (error) {
         console.error('Error saving to localStorage', error);
       }
     
   }
 
-  // Obtener un valor desde localStorage solo si estamos en el navegador
   getItem<T>(key: string): T | null {
       try {
-        const value = localStorage.getItem(key);  // Obtenemos el valor de localStorage
+        const value = localStorage.getItem(key); 
         if (value) {
-          return JSON.parse(value);  // Convertimos el valor de JSON a objeto
+          return JSON.parse(value);  
         }
         return null;
       } catch (error) {
@@ -32,28 +30,25 @@ export class StorageService {
       }
   }
 
-  // Eliminar un item de localStorage solo si estamos en el navegador
   removeItem(key: string): void {
       try {
-        localStorage.removeItem(key);  // Eliminamos el item de localStorage
+        localStorage.removeItem(key);  
       } catch (error) {
         console.error('Error removing from localStorage', error);
       }
     
   }
 
-  // Limpiar todos los items de localStorage solo si estamos en el navegador
   clear(): void {
       try {
-        localStorage.clear();  // Limpiamos todos los items en localStorage
+        localStorage.clear();  // not required yet
       } catch (error) {
         console.error('Error clearing localStorage', error);
       }
     
   }
 
-  // Verificar si un item existe en localStorage solo si estamos en el navegador
   contains(key: string): boolean {
-      return localStorage.getItem(key) !== null;  // Verificamos si existe el item
+      return localStorage.getItem(key) !== null;  //not required yet
   }
 }
